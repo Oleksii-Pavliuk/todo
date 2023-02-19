@@ -5,9 +5,12 @@ on:
     - main
 
 jobs:
-  build:
-    name: Build and Test
+  deploy:
+    name: Build and Deploy
     runs-on: ubuntu-latest
+    permissions:
+      contents: 'read'
+      id-token: 'write'
     steps:
     - name: Checkout
       uses: actions/checkout@v3
@@ -25,16 +28,6 @@ jobs:
 
     - name: Build
       run: ng build
-      
-  deploy:
-    name: Auth and Deploy
-    runs-on: ubuntu-latest
-    permissions:
-      contents: 'read'
-      id-token: 'write'
-    steps:
-    - name: Checkout
-      uses: actions/checkout@v3
       
     - id: 'auth'
       name: Authenticate to Google Cloud
