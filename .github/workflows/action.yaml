@@ -5,7 +5,7 @@ on:
     - main
 
 jobs:
-  deploy:
+  BuildAndDeploy:
     name: Build and Deploy
     runs-on: ubuntu-latest
     permissions:
