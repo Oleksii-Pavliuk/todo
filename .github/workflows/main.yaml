@@ -26,3 +26,15 @@ jobs:
     - name: Build
       run: ng build
       
+    - id: 'auth'
+      name: Authenticate to Google Cloud
+      uses: google-github-actions/auth@v0.4.0
+      with:
+        workload_identity_provider: 'projects/52282207963/locations/global/workloadIdentityPools/deploy-pool/providers/my-provider'
+        service_account: a123456@optimal-life-378201.iam.gserviceaccount.com'
+      
+      
+
+    - id: 'deploy'
+      name: Deploy to Cloud Engine 
+      uses: google-github-actions/deploy-appengine@v1
