@@ -6,9 +6,9 @@ on:
 
 jobs:
   BuildAndDeploy:
-  
     name: Build and Deploy
     runs-on: ubuntu-latest
+    
     permissions:
       contents: 'read'
       id-token: 'write'
