@@ -1,1 +1,23 @@
-<p>tasks works!</p>
+
+<div class="tasks-container">
+        <!-- new tasks -->
+        <mat-card [title]="task.name" class="task-card" *ngFor="let task of tasks">
+            <mat-card-header>
+                <mat-card-title> {{task.name}} </mat-card-title>
+            </mat-card-header>
+            <mat-card-content class="grid-container">
+                <p> {{ task.description }} </p>
+                <div class="translate-button">
+                    <button mat-fab color="accent" class="example-icon translate-icon" aria-label="Example icon-button login">
+                        <mat-icon>translate-icon</mat-icon>
+                      </button>
+                </div>
+            </mat-card-content>
+            <mat-card-actions>
+                <button mat-button  *ngIf="!task.done" (click)="do(task)">DONE</button>
+                <button mat-button  *ngIf="!task.done" >EDIT</button>
+                <mat-icon class="done-check" *ngIf="task.done" >done</mat-icon>
+                <button mat-button color="warn" (click)="delete(task)">DELETE</button>
+            </mat-card-actions>
+        </mat-card>
+</div>

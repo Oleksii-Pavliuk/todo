@@ -1,4 +1,10 @@
-<a [routerLink]="['/']">
-    <h1>ToDo</h1>
+<mat-toolbar color="primary">
+  <a routerLink="['/']">
+    <span>ToDo</span>
   </a>
-  
+
+  <span class="example-spacer"></span>
+  <button mat-icon-button class="example-icon login-icon" aria-label="Example icon-button login">
+    <mat-icon>login</mat-icon>
+  </button>
+</mat-toolbar>
