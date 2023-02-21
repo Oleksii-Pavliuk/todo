@@ -1,0 +1,30 @@
+
+<form 
+        [formGroup]="authForm"
+        (ngSubmit)="OnSubmit(group.value)"
+>
+    <p>
+        <mat-button-toggle-group #group="matButtonToggleGroup" appearance="legacy" name="fontStyle" aria-label="Font Style">
+          <mat-button-toggle value="Register">Sign up</mat-button-toggle>
+          <mat-button-toggle value="Login">Sign in </mat-button-toggle>
+        </mat-button-toggle-group>
+      </p>
+    <p>
+        <mat-form-field appearance="fill">
+          <mat-label>Username</mat-label>
+          <input type="email" matInput placeholder="Email">
+          <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+          <mat-hint>Email will be used as username</mat-hint>
+        </mat-form-field>
+      </p>
+      <p>
+        <mat-form-field appearance="outline">
+          <mat-label>Password</mat-label>
+          <input matInput placeholder="Password">
+          <mat-icon matSuffix>password</mat-icon>
+        </mat-form-field>
+      </p>
+      <p>
+        <button mat-raised-button color="primary" type="submit">{{group.value || 'Login'}}</button>
+      </p>
+</form>

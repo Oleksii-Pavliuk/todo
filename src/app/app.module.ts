@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
+import { ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -11,26 +11,37 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import {MatCardModule} from '@angular/material/card';
 import {MatButtonToggleModule} from '@angular/material/button-toggle';
-import {MatProgressBarModule} from '@angular/material/progress-bar';
+import { EditTaskComponent } from './edit-task/edit-task.component';
+import { MatFormFieldModule} from '@angular/material/form-field';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
+import { HttpClientModule } from '@angular/common/http';
+import {MatInputModule} from '@angular/material/input';
+import { AuthenticateComponent } from './authenticate/authenticate.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     TopBarComponent,
-    TasksComponent
+    TasksComponent,
+    EditTaskComponent,
+    AuthenticateComponent
   
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
+    HttpClientModule,
     MatToolbarModule,
     MatIconModule,
     MatButtonModule,
     MatCardModule,
     MatButtonToggleModule,
-    MatProgressBarModule
+    MatFormFieldModule,
+    MatSnackBarModule,
+    MatInputModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

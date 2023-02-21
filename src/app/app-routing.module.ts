@@ -1,9 +1,13 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AuthenticateComponent } from './authenticate/authenticate.component';
+import { EditTaskComponent } from './edit-task/edit-task.component';
 import {TasksComponent} from './tasks/tasks.component'
 
 const routes: Routes = [
-  { path: '', component: TasksComponent}
+  { path: '', component: TasksComponent},
+  { path: 'tasks/:taskId', component: EditTaskComponent },
+  { path: 'authenticate', component: AuthenticateComponent}
 ];
 
 @NgModule({

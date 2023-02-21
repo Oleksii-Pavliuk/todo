@@ -1,0 +1,9 @@
+POST https://translation.googleapis.com/language/translate/v2 HTTP/1.1
+content-type: application/json
+
+{
+  "q": "The Great Pyramid of Giza (also known as the Pyramid of Khufu or the Pyramid of Cheops) is the oldest and largest of the three pyramids in the Giza pyramid complex.",
+  "source": "en",
+  "target": "es",
+  "format": "text"
+}

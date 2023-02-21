@@ -4,8 +4,8 @@
   }
 
 .task-card{
-    max-width: 90vw;
-    margin: 20px auto;
+    max-width: 80vw;
+    margin: 30px auto;
 }
 
 .translate-button{
@@ -15,4 +15,26 @@
 
 .done-check{
     margin: 0px 20px;
+}
+
+.add-item-button{
+    position: fixed;
+    bottom: 5vh;
+    right: 2vw;
+}
+
+.no-tasks{
+    font-size: 30px;
+    font-weight: 300;
+    color: gray;
+    height: 90vh;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-items: center;
+}
+
+.no-tasks button{
+    margin: 2rem;
 }

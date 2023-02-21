@@ -1,0 +1,39 @@
+
+<!-- Edit task -->
+<div *ngIf="task">
+    <form class="example-form"
+        [formGroup]="taskForm"
+        (ngSubmit)="EditSubmit(task.id)"
+    >
+    <mat-form-field class="example-full-width">
+        <mat-label>Task name</mat-label>
+        <input id="name" formControlName="name"  matInput placeholder="Ex. Eat pizza" value="task.name">
+      </mat-form-field>
+    
+      <mat-form-field class="example-full-width">
+        <mat-label>Task description</mat-label>
+        <textarea id="description" formControlName="description"  matInput placeholder="Ex. Eat pizza ASAP"></textarea>
+      </mat-form-field>
+    <br />
+    <button mat-raised-button color="primary" type="submit">Edit task</button></form>
+</div>
+
+
+<!-- Add task -->
+<div *ngIf="!task">
+    <form class="example-form"
+        [formGroup]="taskForm"
+        (ngSubmit)="AddSubmit()"
+    >
+    <mat-form-field class="example-full-width">
+        <mat-label>Task name</mat-label>
+        <input id="name" formControlName="name"  matInput placeholder="Ex. Eat pizza" value="Sushi">
+      </mat-form-field>
+    
+      <mat-form-field class="example-full-width">
+        <mat-label>Task description</mat-label>
+        <textarea id="description" formControlName="description" matInput placeholder="Ex. Eat pizza ASAP"></textarea>
+      </mat-form-field>
+    <br />
+    <button class="button" mat-raised-button color="primary" type="submit">Add task</button></form>
+</div>
