@@ -15,4 +15,4 @@
 
 ## CI/CD, Testing
   
-  Deployment to Google Cloud on push 
+   Deployment to Google Cloud on push 
