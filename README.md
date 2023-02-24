@@ -31,6 +31,7 @@ If user is admin ( username: admin, password: 123456), admin can view other user
 ## CI/CD, Testing
   
    Deployment to Google Cloud on push both app and cloud functions 
+   Automated test of cloud functions with http requests
    
 ## Auto GCP deployment instructions 
 
