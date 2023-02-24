@@ -1,7 +1,22 @@
 import { Injectable } from '@angular/core';
-import { Task } from './tasks';
+import { HttpClient } from '@angular/common/http';
+import { Timestamp, map } from 'rxjs';
 
-// create User interface
+
+
+// create Task
+export interface Task {
+  id: number,
+  name:string,
+  description:string,
+  deleted: boolean,
+  translated: boolean,
+  translated_date: Timestamp<number> | null,
+  done: boolean,
+  done_date: Timestamp<number> | null,
+  user_id: number
+}
+
 export interface User { 
   username: string,
   password: string
@@ -12,7 +27,7 @@ export interface User {
 })
 export class DataService{
   items: Task[] = [];
-  users: User[] = [];
+  users: User[] = []
 
   // add task to tasks
   addItem(name: unknown, description: unknown) {
@@ -20,14 +35,32 @@ export class DataService{
       id: this.items.length + 1,
       name: name as string,
       description: description as string,
-      done:false,
+      done: false,
+      translated: false,
+      deleted: false,
+      translated_date: null,
+      done_date: null,
+      user_id: 0
     })
   }
 
+
   // get tasks
-  getItems() {
-    return this.items;
+  getTasks(user_id: number = 1) {
+    this.http.post<Task[]>('https://australia-southeast1-optimal-life-378201.cloudfunctions.net/getTasks',
+    { "user_id" : user_id },
+    { headers: {"Content-Type": "application/json"} }).subscribe(
+      tasks => {
+        // Use the array of tasks returned by the API
+        console.log(tasks);
+      },
+      error => {
+        console.error(error);
+      }
+    );
+    return this.items
   }
+
 
   // edit task
   editItem(name: unknown, description: unknown, id: number){
@@ -51,6 +84,10 @@ export class DataService{
     const x = this.items.splice(index, 1);
   }
 
+
+  constructor(private http: HttpClient){}
+  
+
   // add user
   addUser(user: User) {
     this.users.push(user);
@@ -63,7 +100,8 @@ export class DataService{
 
   // login user
   checkUser(user: User){
-    if(this.users.includes(user)){
+    let accounts = this.getUsers()
+    if(accounts.includes(user)){
       return true
     }else{
       return false
@@ -75,5 +113,6 @@ export class DataService{
     this.users.filter((obj) => {
       obj != user;
     });
+
   }
 }

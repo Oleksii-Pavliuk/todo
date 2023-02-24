@@ -2,9 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import {MatSnackBar} from '@angular/material/snack-bar';
 
-import { Task } from '../tasks';
 import { TranslateService } from '../transalte.service';
-import {DataService} from '../data.service'
+import {DataService, Task} from '../data.service'
 
 // List of tasks
 
@@ -32,7 +31,7 @@ export class TasksComponent implements OnInit{
   }
 
   // get tasks from db
-  tasks = this.DataService.getItems();
+  tasks = this.DataService.getTasks();
 
   // change task to done status
   do(task:Task){

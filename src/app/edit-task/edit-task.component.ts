@@ -52,7 +52,7 @@ export class EditTaskComponent implements OnInit {
     const routeParams = this.route.snapshot.paramMap;
     const taskIdFromRoute = Number(routeParams.get('taskId'));
 
-    let tasks = this.DataService.getItems();
+    let tasks = this.DataService.getTasks();
   
     // -1231 its just a custom identifier that identifies that we adding item not editing 
     if( taskIdFromRoute == -1231){
