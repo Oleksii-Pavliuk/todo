@@ -17,15 +17,20 @@ If user is admin ( username: admin, password: 123456), admin can view other user
   
   ***-  20.02.23 - v0.1***  Postgres on GCP created
   
+  ***-  22.02.23 - v0.2***  Backend finishehed and deployed
   
+  >+ main.py file created in todoSRV
+ 
+  ***-  23.02.23 - v0.2***  Automated tests created and functions tested
   
-  ***-  22.02.23 - v0.1***  Workflow in Github Actions created to deploy Cloud Functions to GCP
+  >+ tests/index.ts file created in todoSRV
+  
+  ***-  24.02.23 - v0.2***  Workflow in Github Actions created to deploy Cloud Functions to GCP
   
   > + main.yaml file created in todoSRV
   
-  ***-  23.02.23 - v0.2***  Backend finishehed and deployed
   
-  >+ main.py file created in todoSRV
+  
    
 
 ## CI/CD, Testing
