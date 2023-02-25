@@ -47,20 +47,25 @@ export class DataService{
 
   // get tasks
   getTasks(user_id: number = 1) {
-    this.http.post<Task[]>('https://australia-southeast1-optimal-life-378201.cloudfunctions.net/getTasks',
-    { "user_id" : user_id },
-    { headers: {"Content-Type": "application/json"} }).subscribe(
-      tasks => {
-        // Use the array of tasks returned by the API
-        console.log(tasks);
+    const url = 'https://australia-southeast1-optimal-life-378201.cloudfunctions.net/getTasks';
+    const body = { user_id: 1 };
+    this.http.post(url, body).subscribe(
+      (data) => {
+        this.items.push(data as Task); // This will log the response data to the console
       },
-      error => {
-        console.error(error);
+      (error) => {
+        console.log(error); // This will log any errors to the console
       }
     );
+
+
+    const urls = 'https://australia-southeast1-optimal-life-378201.cloudfunctions.net/function-1';
+    const bodys = { name:  'dasd'  };
+    let ress = this.http.post(url, body);
+    console.log(ress)
+
     return this.items
   }
-
 
   // edit task
   editItem(name: unknown, description: unknown, id: number){

@@ -1,0 +1,7 @@
+{
+    "/api/*": {
+        "target": "https://australia-southeast1-optimal-life-378201.cloudfunctions.net/",
+        "secure": false,
+        "logLevel": "debug"
+    }
+}
