@@ -24,18 +24,21 @@ export class AuthenticateComponent {
         this.UsersService.checkUser({id: null, username: this.authForm.get('username')?.value as string, password: this.authForm.get('password')?.value as string, admin: false})
         .then((result: boolean) => {
           if(result){
-          this.cookieService.set('user', this.authForm.get('username')?.value as string);
-          console.log('saved to local storage' + localStorage.getItem('user'))
+            this.Router.navigate(['/']);
           }else{
             this._snackBar.open('Wrong credentials', '', {duration:5000})
           }
         })
       }else if(action == 'Register'){
         this.UsersService.addUser({id: null, username: this.authForm.get('username')?.value as string, password: this.authForm.get('password')?.value as string, admin: false})
-        this.cookieService.set('user', this.authForm.get('username')?.value as string);
-        console.log('saved to local storage' + localStorage.getItem('user'))
-      }
-      this.Router.navigate(['/']);
+        .then((result: boolean) => {
+          if(result){
+            this.Router.navigate(['/']);
+          }else{
+            this._snackBar.open('Error', '', {duration:5000})
+          }
+      })
+    }
     }
 
 

@@ -19,16 +19,19 @@ export class UsersService {
   users: User[] = [];
 
   // add user
-  addUser(user : User) {
+  async addUser(user : User) {
+    console.log(user)
     const urls = 'https://australia-southeast1-optimal-life-378201.cloudfunctions.net/addUser';
     const body = { "username": user.username, "password" : user.password };
     const headers = new HttpHeaders().set('Content-Type', 'application/json');
-    const req = this.http.post(urls,body, {headers: headers})
-    
-    req.subscribe((data: string | any) => {
-        return data == 'ok' ? true : false 
-      });
-    };
+    try {
+      const response = await this.http.post(urls, body, {headers: headers}).toPromise();
+      return response === 'ok';
+    } catch (error) {
+      console.error('Error checking user:', error);
+      return false;
+    }
+  }
 
  
 
@@ -47,12 +50,13 @@ export class UsersService {
 
   // login user
   async checkUser(user: User): Promise<boolean> {
+    console.log(user)
     const urls = 'https://australia-southeast1-optimal-life-378201.cloudfunctions.net/checkUser';
-    const body = { "username": user.username, "password" : user.password };
+    const body = { "username": String(user.username), "password" : String(user.password) };
     const headers = new HttpHeaders().set('Content-Type', 'application/json');
     try {
       const response = await this.http.post(urls, body, {headers: headers}).toPromise();
-      return response === 'ok';
+      return response === 200;
     } catch (error) {
       console.error('Error checking user:', error);
       return false;

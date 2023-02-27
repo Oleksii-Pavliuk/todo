@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { CookieService } from 'ngx-cookie-service';
 import { Router } from '@angular/router';
+import { User } from '../users.service';
 
 // Top bar
 @Component({
@@ -9,12 +9,13 @@ import { Router } from '@angular/router';
   styleUrls: ['./top-bar.component.css']
 })
 export class TopBarComponent {
-  user = this.cookieService.get('user')
+  user = sessionStorage.getItem('user')
+  admin = sessionStorage.getItem('admin')
   logout(){
-    this.cookieService.deleteAll()
+    sessionStorage.clear()
     this.Router.navigate(['/']);
   }
 
-  constructor(private cookieService: CookieService,
-    private Router: Router,) { }
+  constructor(
+    private Router: Router) { }
 }

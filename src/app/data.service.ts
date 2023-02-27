@@ -53,7 +53,6 @@ export class DataService{
   // get tasks
   getTasks(user_id: number = 1) {
     this.items = []
-    var tmp : Task[] = []
     const urls = 'https://australia-southeast1-optimal-life-378201.cloudfunctions.net/getTasks';
     const body = { "user_id": user_id };
     const headers = new HttpHeaders().set('Content-Type', 'application/json');
@@ -61,12 +60,11 @@ export class DataService{
     
     req.subscribe((data: { data : Task[]} | any ) => {
       data.data.forEach((task : Task )=> {
-        tmp.push(task)
+        this.items.push(task)
       })
       // logs the array of items to the console
     })
-    this.items = tmp
-    return tmp;
+    return this.items
   }
 
 
@@ -102,15 +100,18 @@ export class DataService{
 
 
   // Translate item
-  translateItem(id: number) {
+  async translateItem(task: Task) : Promise<{ name: string; text: string; }> {
     const urls = 'https://australia-southeast1-optimal-life-378201.cloudfunctions.net/translateTask';
-    const body = { "id" : id };
+    const body = { "id" : task.id , "name" : task.name, "text" : task.description};
     const headers = new HttpHeaders().set('Content-Type', 'application/json');
-    const req = this.http.post(urls,body, {headers: headers})
-    
-    req.subscribe((data: string| any ) => {
-        return data == 'ok' ? true : false
-    });
+    try {
+      const response = await this.http.post(urls, body, {headers: headers}).toPromise();
+      console.log(response)
+      return response as {name: string, text: string}
+    } catch (error) {
+      console.error('Error checking user:', error);
+      return {name: 'Error', text: error as string}
+    }
   }
 
 

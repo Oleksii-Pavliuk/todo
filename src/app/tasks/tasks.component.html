@@ -1,5 +1,5 @@
 
-
+<ng-container *ngIf="!user">
 <div class="tasks-container">
     <!-- Tasks forEach -->
     <ng-container *ngFor="let task of tasks">
@@ -10,7 +10,7 @@
             <mat-card-content class="grid-container">
                 <p> {{ task.description }} </p>
                 <div class="translate-button">
-                    <button mat-fab color="primary" class="example-icon translate-icon" aria-label="Example icon-button login">
+                    <button mat-fab (click)="translateTask(task)" color="primary" class="example-icon translate-icon" aria-label="Example icon-button login">
                         <mat-icon>translate-icon</mat-icon>
                       </button>
                 </div>
@@ -36,7 +36,17 @@
         <mat-icon>add</mat-icon>
     </button>
 </div>
-
+</ng-container>
+<ng-container *ngIf="!user">
+    <div class="no-tasks" >
+        <p>
+            You are not logged in, log in or create account
+        </p>
+        <button  [routerLink]="['authenticate']" [title]="'Login'" mat-fab color="primary" aria-label="Example icon button with a plus icon">
+            <mat-icon>login</mat-icon>
+          </button>
+    </div>
+</ng-container>
 
 
 
