@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Timestamp, map } from 'rxjs';
+import { HttpClient,HttpHeaders } from '@angular/common/http';
+import { Timestamp} from 'rxjs';
 
 
 
-// create Task
+// create Task interface 
 export interface Task {
   id: number,
   name:string,
@@ -17,20 +17,25 @@ export interface Task {
   user_id: number
 }
 
-export interface User { 
-  username: string,
-  password: string
-}
+
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class DataService{
   items: Task[] = [];
-  users: User[] = []
 
   // add task to tasks
-  addItem(name: unknown, description: unknown) {
+  addItem(name: unknown, description: unknown, user_id : number = 1) {
+    const urls = 'https://australia-southeast1-optimal-life-378201.cloudfunctions.net/addTask';
+    const body = { "name" : name, "description": description, "user_id" : user_id};
+    const headers = new HttpHeaders().set('Content-Type', 'application/json');
+    const req = this.http.post(urls,body, {headers: headers})
+    
+    req.subscribe((data: string| any ) => {
+      return data == 'ok' ? true : false
+    });
     this.items.push(    {
       id: this.items.length + 1,
       name: name as string,
@@ -47,43 +52,79 @@ export class DataService{
 
   // get tasks
   getTasks(user_id: number = 1) {
-    const url = 'https://australia-southeast1-optimal-life-378201.cloudfunctions.net/getTasks';
-    const body = { user_id: 1 };
-    this.http.post(url, body).subscribe(
-      (data) => {
-        this.items.push(data as Task); // This will log the response data to the console
-      },
-      (error) => {
-        console.log(error); // This will log any errors to the console
-      }
-    );
-
-
-    const urls = 'https://australia-southeast1-optimal-life-378201.cloudfunctions.net/function-1';
-    const bodys = { name:  'dasd'  };
-    let ress = this.http.post(url, body);
-    console.log(ress)
-
-    return this.items
+    this.items = []
+    var tmp : Task[] = []
+    const urls = 'https://australia-southeast1-optimal-life-378201.cloudfunctions.net/getTasks';
+    const body = { "user_id": user_id };
+    const headers = new HttpHeaders().set('Content-Type', 'application/json');
+    const req = this.http.post(urls,body, {headers: headers})
+    
+    req.subscribe((data: { data : Task[]} | any ) => {
+      data.data.forEach((task : Task )=> {
+        tmp.push(task)
+      })
+      // logs the array of items to the console
+    })
+    this.items = tmp
+    return tmp;
   }
+
 
   // edit task
   editItem(name: unknown, description: unknown, id: number){
-    this.items.map((item) => {
-      item.id === id ? (item.name = name as string, item.description = description as string) : item;
-    });
+    const urls = 'https://australia-southeast1-optimal-life-378201.cloudfunctions.net/editTask';
+    const body = { "name": name, "description" : description, "id" : id };
+    const headers = new HttpHeaders().set('Content-Type', 'application/json');
+    const req = this.http.post(urls,body, {headers: headers})
     
+    req.subscribe((data: string| any ) => {
+        return data == 'ok' ? true : false
+    });
   }
+
+
 
   // change task
   changeitem(task: Task) {
+    const urls = 'https://australia-southeast1-optimal-life-378201.cloudfunctions.net/changeTask';
+    const body = { "id" : task.id };
+    const headers = new HttpHeaders().set('Content-Type', 'application/json');
+    const req = this.http.post(urls,body, {headers: headers})
+    
+    req.subscribe((data: string| any ) => {
+        return data == 'ok' ? true : false
+    });
     this.items.map((item) => {
       item === task? item.done = !item.done : item;
     });
   }
 
+
+
+  // Translate item
+  translateItem(id: number) {
+    const urls = 'https://australia-southeast1-optimal-life-378201.cloudfunctions.net/translateTask';
+    const body = { "id" : id };
+    const headers = new HttpHeaders().set('Content-Type', 'application/json');
+    const req = this.http.post(urls,body, {headers: headers})
+    
+    req.subscribe((data: string| any ) => {
+        return data == 'ok' ? true : false
+    });
+  }
+
+
+
   // delete task
   deleteItem(task: Task) {
+    const urls = 'https://australia-southeast1-optimal-life-378201.cloudfunctions.net/deleteTask';
+    const body = { "id" : task.id };
+    const headers = new HttpHeaders().set('Content-Type', 'application/json');
+    const req = this.http.post(urls,body, {headers: headers})
+    
+    req.subscribe((data: string| any ) => {
+        return data == 'ok' ? true : false
+    });
     const index =this.items.indexOf(task);
 
     const x = this.items.splice(index, 1);
@@ -93,31 +134,4 @@ export class DataService{
   constructor(private http: HttpClient){}
   
 
-  // add user
-  addUser(user: User) {
-    this.users.push(user);
-  }
-
-  // get users
-  getUsers() {
-    return this.users;
-  }
-
-  // login user
-  checkUser(user: User){
-    let accounts = this.getUsers()
-    if(accounts.includes(user)){
-      return true
-    }else{
-      return false
-    }
-  }
-
-  // delete user
-  deleteuser(user: User) {
-    this.users.filter((obj) => {
-      obj != user;
-    });
-
-  }
 }

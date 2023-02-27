@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import {FormBuilder, FormControl, Validators,} from '@angular/forms';
 import { CookieService } from 'ngx-cookie-service';
 
-import { DataService } from '../data.service';
+import { UsersService } from '../users.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
@@ -21,14 +21,17 @@ export class AuthenticateComponent {
 
     OnSubmit(action:string = 'Login'){
       if(action == 'Login'){
-        if(this.DataService.checkUser({username: this.authForm.get('username')?.value as string, password: this.authForm.get('password')?.value as string})){
+        this.UsersService.checkUser({id: null, username: this.authForm.get('username')?.value as string, password: this.authForm.get('password')?.value as string, admin: false})
+        .then((result: boolean) => {
+          if(result){
           this.cookieService.set('user', this.authForm.get('username')?.value as string);
           console.log('saved to local storage' + localStorage.getItem('user'))
-        }else{
-          this._snackBar.open('Wrong credentials', '', {duration:5000})
-        }
+          }else{
+            this._snackBar.open('Wrong credentials', '', {duration:5000})
+          }
+        })
       }else if(action == 'Register'){
-        this.DataService.addUser({username: this.authForm.get('username')?.value as string, password: this.authForm.get('password')?.value as string})
+        this.UsersService.addUser({id: null, username: this.authForm.get('username')?.value as string, password: this.authForm.get('password')?.value as string, admin: false})
         this.cookieService.set('user', this.authForm.get('username')?.value as string);
         console.log('saved to local storage' + localStorage.getItem('user'))
       }
@@ -39,7 +42,7 @@ export class AuthenticateComponent {
     constructor(
       private Router: Router,
       private formBuilder : FormBuilder,
-      private DataService: DataService,
+      private UsersService: UsersService,
       private cookieService: CookieService,
       private _snackBar: MatSnackBar,) {}
 

@@ -2,9 +2,10 @@
 
 <div class="tasks-container">
     <!-- Tasks forEach -->
-        <mat-card [title]="task.name" class="task-card" *ngFor="let task of tasks">
+    <ng-container *ngFor="let task of tasks">
+        <mat-card [title]="task.name" class="task-card"*ngIf="!task.deleted" >
             <mat-card-header>
-                <mat-card-title> {{task.name}} </mat-card-title>
+                <mat-card-title> {{task.name}}</mat-card-title>
             </mat-card-header>
             <mat-card-content class="grid-container">
                 <p> {{ task.description }} </p>
@@ -21,6 +22,7 @@
                 <button mat-button color="warn" (click)="delete(task); openSnackBar('Deleted', '')" >DELETE</button>
             </mat-card-actions>
         </mat-card>
+    </ng-container>    
         <div class="no-tasks" *ngIf="tasks.length == 0">
             <p>
                 You have no tasks yet, add them by pressing plus button

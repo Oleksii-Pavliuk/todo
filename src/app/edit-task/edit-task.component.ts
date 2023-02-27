@@ -2,9 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Form, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 
-import { Task } from 'src/app/tasks';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import {DataService} from '../data.service'
+import {DataService, Task} from '../data.service'
 
 
 // Add or edit task
@@ -51,12 +50,16 @@ export class EditTaskComponent implements OnInit {
     // Get the product id from the current route.
     const routeParams = this.route.snapshot.paramMap;
     const taskIdFromRoute = Number(routeParams.get('taskId'));
+    console.log(taskIdFromRoute)
 
     let tasks = this.DataService.getTasks();
-  
+    console.log(tasks);
+    console.log(tasks.length);
+
     // -1231 its just a custom identifier that identifies that we adding item not editing 
     if( taskIdFromRoute == -1231){
-      this.task == undefined
+      this.task = undefined
+      console.log(-1231)
     }else{
     // Find the product that correspond with the id provided in route.
     this.task = tasks.find(task => task.id === taskIdFromRoute);

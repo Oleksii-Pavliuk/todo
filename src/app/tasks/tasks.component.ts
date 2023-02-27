@@ -4,6 +4,8 @@ import {MatSnackBar} from '@angular/material/snack-bar';
 
 import { TranslateService } from '../transalte.service';
 import {DataService, Task} from '../data.service'
+import { User } from '../users.service';
+import { Router } from '@angular/router';
 
 // List of tasks
 
@@ -22,7 +24,9 @@ export class TasksComponent implements OnInit{
     shippingCosts!: Observable<{ type: string, price: number }[]>;
   
     ngOnInit(): void {
-      
+      if(!sessionStorage.getItem('user')){
+        this.Router.navigate(['authenticate'])
+      }
     }
 
   // Snack bar on actions
@@ -31,7 +35,7 @@ export class TasksComponent implements OnInit{
   }
 
   // get tasks from db
-  tasks = this.DataService.getTasks();
+  tasks = this.DataService.getTasks()
 
   // change task to done status
   do(task:Task){
@@ -45,7 +49,8 @@ export class TasksComponent implements OnInit{
 
   // add service
   constructor(private _snackBar: MatSnackBar,
-    private DataService: DataService) {}
+    private DataService: DataService,
+    private Router: Router) {}
 
   
 }
