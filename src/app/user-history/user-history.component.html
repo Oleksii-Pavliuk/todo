@@ -1,0 +1,15 @@
+<top-bar></top-bar>
+<h2>{{user}}'s tasks:</h2>
+<div class="container" *ngFor="let task of tasks">
+    <mat-card [title]="task.name" class="card" >
+        <mat-card-header>
+            <mat-card-title> {{task.name}}</mat-card-title>
+            <mat-card-subtitle>{{ task.description }} </mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content>
+            <p *ngIf="task.translated == true">Translated on: {{task.translated_date}}</p>
+            <p *ngIf="task.done== true">Done on: {{task.done_date}}</p>
+            <p *ngIf="task.deleted">Deleted</p>
+        </mat-card-content>
+    </mat-card>
+</div>

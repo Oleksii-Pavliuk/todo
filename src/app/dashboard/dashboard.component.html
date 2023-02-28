@@ -1,0 +1,23 @@
+
+<top-bar></top-bar>
+    <h2>Users:</h2>
+    <div class="users-container">
+        <!-- Users forEach -->
+        <ng-container  *ngFor="let user of users">
+            <mat-card [routerLink]="['/dashboard', user.username]"  [title]="user.username" class="user-card">
+                <mat-card-header>
+                    <mat-card-title> {{user.username}}</mat-card-title>
+                </mat-card-header>
+                <mat-card-content class="grid-container">
+                    <p> Admin: {{ user.admin }} </p>
+                </mat-card-content>
+            </mat-card>
+        </ng-container>
+    </div>
+
+
+
+
+
+
+

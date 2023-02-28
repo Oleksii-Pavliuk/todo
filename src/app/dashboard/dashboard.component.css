@@ -1,0 +1,12 @@
+.user-card {
+    max-width: 400px;
+    margin-bottom: 8px;
+    margin: 3rem;
+    cursor: pointer;
+  }
+
+
+h2{
+  margin-top: 2rem;
+  text-align: center;
+}

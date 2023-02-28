@@ -17,6 +17,8 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
 import { HttpClientModule } from '@angular/common/http';
 import {MatInputModule} from '@angular/material/input';
 import { AuthenticateComponent } from './authenticate/authenticate.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { UserHistoryComponent } from './user-history/user-history.component';
 
 
 @NgModule({
@@ -25,7 +27,9 @@ import { AuthenticateComponent } from './authenticate/authenticate.component';
     TopBarComponent,
     TasksComponent,
     EditTaskComponent,
-    AuthenticateComponent
+    AuthenticateComponent,
+    DashboardComponent,
+    UserHistoryComponent
   
   ],
   imports: [

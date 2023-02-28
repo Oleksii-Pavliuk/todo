@@ -33,7 +33,7 @@ export class UsersService {
       }else{
         return false
       }
-      if (response.data[0].admin){
+      if (response.data[0].admin == true){
         sessionStorage.setItem('admin', 'true')
       }
       return true  
@@ -47,15 +47,18 @@ export class UsersService {
 
   // get users
   getUsers() {
+    this.users = []
     const urls = 'https://australia-southeast1-optimal-life-378201.cloudfunctions.net/getUsers';
     const headers = new HttpHeaders().set('Content-Type', 'application/json');
     const req = this.http.post(urls, {headers: headers})
     
-    req.subscribe((data: { data : User[]} | any ) => {
-      data.data.forEach((user : User )=> {
+    req.subscribe((data : User[] | any) => {
+      console.log(data)
+      data.forEach((user : User )=> {
         this.users.push(user)
       });
     });
+    return this.users
   }
 
   // login user
@@ -73,7 +76,7 @@ export class UsersService {
       }else{
         return false
       }
-      if (response.data[0].admin){
+      if (response.data[0].admin == true){
         sessionStorage.setItem('admin', 'true')
       }
       return true  

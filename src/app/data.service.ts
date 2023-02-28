@@ -59,10 +59,10 @@ export class DataService{
   }
 
   // get tasks
-  getTasks() {
+  getTasks(username: string = sessionStorage.getItem('user') as string  ) {
     this.items = []
     const urls = 'https://australia-southeast1-optimal-life-378201.cloudfunctions.net/getTasks';
-    const body = { "username": sessionStorage.getItem('user') };
+    const body = { "username": username };
     const headers = new HttpHeaders().set('Content-Type', 'application/json');
     const req = this.http.post(urls,body, {headers: headers})
     
