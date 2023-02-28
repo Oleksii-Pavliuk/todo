@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { User } from '../users.service';
 
@@ -13,9 +14,13 @@ export class TopBarComponent {
   admin = sessionStorage.getItem('admin')
   logout(){
     sessionStorage.clear()
-    this.Router.navigate(['/']);
+    this._snackBar.open('Loged out successfully', ' ', { duration: 500 })
+    this.Router.navigate(['authenticate']);
+ 
   }
 
+
   constructor(
-    private Router: Router) { }
+    private Router: Router,
+    private _snackBar: MatSnackBar) {}
 }

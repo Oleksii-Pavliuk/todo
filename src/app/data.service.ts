@@ -27,9 +27,9 @@ export class DataService{
   items: Task[] = [];
 
   // add task to tasks
-  addItem(name: unknown, description: unknown, user_id : number = 1) {
+  addItem(name: unknown, description: unknown, username : string = 'test') {
     const urls = 'https://australia-southeast1-optimal-life-378201.cloudfunctions.net/addTask';
-    const body = { "name" : name, "description": description, "user_id" : user_id};
+    const body = { "name" : name, "description": description, "username" : username};
     const headers = new HttpHeaders().set('Content-Type', 'application/json');
     const req = this.http.post(urls,body, {headers: headers})
     
@@ -50,11 +50,19 @@ export class DataService{
   }
 
 
+  // get locac array of items
+  getItems(refresh: boolean){
+    if(refresh){
+      this.getTasks()
+    }
+    return this.items
+  }
+
   // get tasks
-  getTasks(user_id: number = 1) {
+  getTasks() {
     this.items = []
     const urls = 'https://australia-southeast1-optimal-life-378201.cloudfunctions.net/getTasks';
-    const body = { "user_id": user_id };
+    const body = { "username": sessionStorage.getItem('user') };
     const headers = new HttpHeaders().set('Content-Type', 'application/json');
     const req = this.http.post(urls,body, {headers: headers})
     
@@ -126,9 +134,9 @@ export class DataService{
     req.subscribe((data: string| any ) => {
         return data == 'ok' ? true : false
     });
-    const index =this.items.indexOf(task);
-
-    const x = this.items.splice(index, 1);
+    this.items.map((item) => {
+      item === task? item.deleted= !item.deleted : item;
+    });
   }
 
 

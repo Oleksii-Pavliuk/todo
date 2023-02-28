@@ -1,41 +1,41 @@
 
-<ng-container *ngIf="!user">
-<div class="tasks-container">
-    <!-- Tasks forEach -->
-    <ng-container *ngFor="let task of tasks">
-        <mat-card [title]="task.name" class="task-card"*ngIf="!task.deleted" >
-            <mat-card-header>
-                <mat-card-title> {{task.name}}</mat-card-title>
-            </mat-card-header>
-            <mat-card-content class="grid-container">
-                <p> {{ task.description }} </p>
-                <div class="translate-button">
-                    <button mat-fab (click)="translateTask(task)" color="primary" class="example-icon translate-icon" aria-label="Example icon-button login">
-                        <mat-icon>translate-icon</mat-icon>
-                      </button>
-                </div>
-            </mat-card-content>
-            <mat-card-actions>
-                <button mat-button  *ngIf="!task.done" (click)="do(task); openSnackBar('Done', '')">DONE</button>
-                <button mat-button [routerLink]="['/tasks', task.id]"  *ngIf="!task.done" >EDIT</button>
-                <mat-icon class="done-check" *ngIf="task.done" >done</mat-icon>
-                <button mat-button color="warn" (click)="delete(task); openSnackBar('Deleted', '')" >DELETE</button>
-            </mat-card-actions>
-        </mat-card>
-    </ng-container>    
-        <div class="no-tasks" *ngIf="tasks.length == 0">
-            <p>
-                You have no tasks yet, add them by pressing plus button
-            </p>
-            <button  [routerLink]="['/tasks', -1231]" [title]="'Add new task'" mat-fab color="primary" aria-label="Example icon button with a plus icon">
-                <mat-icon>add</mat-icon>
-              </button>
-        </div>
-        <!--  Add new task and passing custom -1231 as id to identify that it should implement add not edit-->
-    <button *ngIf="tasks.length > 0" class="add-item-button" [routerLink]="['/tasks', -1231]" [title]="'Add new task'" mat-fab color="primary" aria-label="Example icon button with a plus icon">
-        <mat-icon>add</mat-icon>
-    </button>
-</div>
+<ng-container *ngIf="user">
+    <div class="tasks-container">
+        <!-- Tasks forEach -->
+        <ng-container *ngFor="let task of tasks">
+            <mat-card [title]="task.name" class="task-card"*ngIf="!task.deleted" >
+                <mat-card-header>
+                    <mat-card-title> {{task.name}}</mat-card-title>
+                </mat-card-header>
+                <mat-card-content class="grid-container">
+                    <p> {{ task.description }} </p>
+                    <div class="translate-button">
+                        <button mat-fab (click)="translateTask(task)" color="primary" class="example-icon translate-icon" aria-label="Example icon-button login">
+                            <mat-icon>translate-icon</mat-icon>
+                        </button>
+                    </div>
+                </mat-card-content>
+                <mat-card-actions>
+                    <button mat-button  *ngIf="!task.done" (click)="do(task); openSnackBar('Done', '')">DONE</button>
+                    <button mat-button [routerLink]="['/tasks', task.id]"  *ngIf="!task.done" >EDIT</button>
+                    <mat-icon class="done-check" *ngIf="task.done" >done</mat-icon>
+                    <button mat-button color="warn" (click)="delete(task); openSnackBar('Deleted', '')" >DELETE</button>
+                </mat-card-actions>
+            </mat-card>
+        </ng-container>    
+            <div class="no-tasks" *ngIf="tasks.length   == 0">
+                <p>
+                    You have no tasks yet, add them by pressing plus button
+                </p>
+                <button  [routerLink]="['/tasks', -1231]" [title]="'Add new task'" mat-fab color="primary" aria-label="Example icon button with a plus icon">
+                    <mat-icon>add</mat-icon>
+                </button>
+            </div>
+            <!--  Add new task and passing custom -1231 as id to identify that it should implement add not edit-->
+        <button *ngIf="tasks.length > 0" class="add-item-button" [routerLink]="['/tasks', -1231]" [title]="'Add new task'" mat-fab color="primary" aria-label="Example icon button with a plus icon">
+            <mat-icon>add</mat-icon>
+        </button>
+    </div>
 </ng-container>
 <ng-container *ngIf="!user">
     <div class="no-tasks" >

@@ -27,7 +27,7 @@ export class EditTaskComponent implements OnInit {
 
   // Add task form submit
   AddSubmit(): void{
-      this.DataService.addItem(this.taskForm.get('name')?.value, this.taskForm.get('description')?.value)
+      this.DataService.addItem(this.taskForm.get('name')?.value, this.taskForm.get('description')?.value, sessionStorage.getItem('user') as string)
       this.openSnackBar('Task added')
       this.Router.navigate(['/']);
   }
@@ -52,7 +52,7 @@ export class EditTaskComponent implements OnInit {
     const taskIdFromRoute = Number(routeParams.get('taskId'));
     console.log(taskIdFromRoute)
 
-    let tasks = this.DataService.getTasks();
+    let tasks = this.DataService.getItems(false);
     console.log(tasks);
     console.log(tasks.length);
 

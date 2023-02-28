@@ -5,7 +5,6 @@ import { HttpClient,HttpHeaders } from '@angular/common/http';
 
 // create User interface
 export interface User { 
-  id:number | null,
   username: string,
   password: string,
   admin: boolean
@@ -16,20 +15,31 @@ export interface User {
 })
 export class UsersService {
 
+
   users: User[] = [];
 
   // add user
-  async addUser(user : User) {
+  async addUser(user : User): Promise<boolean> {
     console.log(user)
     const urls = 'https://australia-southeast1-optimal-life-378201.cloudfunctions.net/addUser';
     const body = { "username": user.username, "password" : user.password };
     const headers = new HttpHeaders().set('Content-Type', 'application/json');
     try {
-      const response = await this.http.post(urls, body, {headers: headers}).toPromise();
-      return response === 'ok';
+      const response   = await this.http.post(urls, body, {headers: headers}).toPromise() as {data: [User]};
+      console.log(response)
+      console.log(response.data[0].username)
+      if (response.data[0].username !== undefined) {
+        sessionStorage.setItem('user', String(response.data[0].username));
+      }else{
+        return false
+      }
+      if (response.data[0].admin){
+        sessionStorage.setItem('admin', 'true')
+      }
+      return true  
     } catch (error) {
       console.error('Error checking user:', error);
-      return false;
+      return false
     }
   }
 
@@ -49,24 +59,34 @@ export class UsersService {
   }
 
   // login user
-  async checkUser(user: User): Promise<boolean> {
+  async checkUser(user: User): Promise<boolean> { 
     console.log(user)
     const urls = 'https://australia-southeast1-optimal-life-378201.cloudfunctions.net/checkUser';
     const body = { "username": String(user.username), "password" : String(user.password) };
     const headers = new HttpHeaders().set('Content-Type', 'application/json');
     try {
-      const response = await this.http.post(urls, body, {headers: headers}).toPromise();
-      return response === 200;
+      const response   = await this.http.post(urls, body, {headers: headers}).toPromise() as {data: [User]};
+      console.log(response)
+      console.log(response.data[0].username)
+      if (response.data[0].username !== undefined) {
+        sessionStorage.setItem('user', String(response.data[0].username));
+      }else{
+        return false
+      }
+      if (response.data[0].admin){
+        sessionStorage.setItem('admin', 'true')
+      }
+      return true  
     } catch (error) {
       console.error('Error checking user:', error);
-      return false;
+      return false
     }
   }
 
   // delete user
   deleteuser(user: User) {
     const urls = 'https://australia-southeast1-optimal-life-378201.cloudfunctions.net/deleteUser';
-    const body = { "id": user.id};
+    const body = { "username": user.username};
     const headers = new HttpHeaders().set('Content-Type', 'application/json');
     const req = this.http.post(urls,body, {headers: headers})
     

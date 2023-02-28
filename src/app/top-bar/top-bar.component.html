@@ -4,7 +4,7 @@
   </a>
 
   <span class="example-spacer"></span>    
-  <button *ngIf="!admin" routerLink="authenticate" mat-icon-button class="example-icon login-icon" aria-label="Example icon-button login">
+  <button *ngIf="admin == 'true'" routerLink="authenticate" mat-icon-button class="example-icon login-icon" aria-label="Example icon-button login">
     <mat-icon>manage_accounts</mat-icon>
   </button>
   <button *ngIf="!user" routerLink="authenticate" mat-icon-button class="example-icon login-icon" aria-label="Example icon-button login">
