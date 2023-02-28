@@ -28,6 +28,7 @@ If user is admin ( username: admin, password: 123456), admin can view other user
   ***-  24.02.23 - v0.2***  Workflow in Github Actions created to deploy Cloud Functions to GCP
   
   > + main.yaml file created in todoSRV
+  
   ***- 27.02.23 - v0.9*** CORS errors fixed
   
   ***- 28.02.23 - v0.9*** API established
@@ -61,11 +62,16 @@ If user is admin ( username: admin, password: 123456), admin can view other user
 #### 1. Assuning that angular project already built and we only need to deploy it
 
 #### 2. Than create 'app.yaml' file in root directory of project and copy content of 'app.yaml' from this repository in your file 
+
 #### 3. Create new projct in GCP console or select your current project
+
 #### 4. Create new application in App engine dashboard https://console.cloud.google.com/appengine , set up your region and language: 'Other', and click "i'll do it later"
 <img width="1179" alt="Screenshot 2023-02-28 at 4 32 50 pm" src="https://user-images.githubusercontent.com/71220725/221763113-9d308a5b-05cf-43e9-8471-d67aa4eb4af1.png">
+
 #### 5. Download gcloud SDK https://cloud.google.com/sdk/docs/install
+
 #### 6. After instalation, go to your terminal and execute ``` gcloud auth login ``` to login, login using your email account assigned to your project
+
 #### 7. Deploy app by executing ``` gcloud app deploy --project=[your project id]``` , you can find your project id in GCP console, in your project details
 
-    Thats it, you can find link to your project in your console.
+Thats it, you can find link to your project in your console.
