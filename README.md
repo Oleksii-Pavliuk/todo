@@ -1,5 +1,7 @@
 # Todo
 
+Just give it a second try if something was not executed as you expected, its because of cloud functions cold start
+
 ## Description 
 Todo app where you can register and login and add your tasks, you can edit your task, mark your task as done, delete your task from list and translate yout task name and description on Ukrainian using Google Translate.
 
