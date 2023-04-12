@@ -31,7 +31,6 @@ If user is admin ( username: admin, password: 123456), admin can view other user
    
 ## Manual GCP deployment instructions  
 
-
 #### 1. Assuning that angular project already built and we only need to deploy it
 
 #### 2. Than create 'app.yaml' file in root directory of project and copy content of 'app.yaml' from this repository in your file 
