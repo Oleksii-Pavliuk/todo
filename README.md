@@ -8,35 +8,6 @@ Todo app where you can register and login and add your tasks, you can edit your 
 ##### Admin interface
 If user is admin ( username: admin, password: 123456), admin can view other users history, like username, list of tasks and history of tasks: when task was done and translated
 
-## Changelog
-  ***-  18.02.23 - v0.1***  App created and deployment to Google Cloud App Engine setted up
-      
-  > + app.yaml file created for app engine deployment 
-  
-  ***-  19.02.23 - v0.1***  Workflow in Github Actions created to build and deploy app to GCP App Engine 
-      
-  > + action.yaml file created 
-  
-  ***-  20.02.23 - v0.1***  Postgres on GCP created
-  
-  ***-  22.02.23 - v0.2***  Backend finishehed and deployed
-  
-  >+ main.py file created in todoSRV
- 
-  ***-  23.02.23 - v0.2***  Automated tests created and functions tested
-  
-  >+ tests/index.ts file created in todoSRV
-  
-  ***-  24.02.23 - v0.2***  Workflow in Github Actions created to deploy Cloud Functions to GCP
-  
-  > + main.yaml file created in todoSRV
-  
-  ***- 27.02.23 - v0.9*** CORS errors fixed
-  
-  ***- 28.02.23 - v0.9*** API established
-  
-  
-  
   
   
    
