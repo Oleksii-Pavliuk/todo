@@ -23,6 +23,8 @@
   > + main.yaml file created in todoSRV
 
 
-  ***-  12.04.23 - v0.2***  Workflow in Github Actions changed to use secrets, because new GCP account used
+  ***-  12.04.23 - v0.3***  Workflow in Github Actions changed to use secrets, because new GCP account used
+  
+  ***- 13.04.23 - v0.3*** Links to Backend changed
   
   
