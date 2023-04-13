@@ -2,8 +2,6 @@ runtime: python27
 api_version: 1
 threadsafe: true
 
-service: angular-app
-
 handlers:
   - url: /
     static_files: dist/todo/index.html
