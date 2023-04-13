@@ -21,7 +21,7 @@ export class UsersService {
   // add user
   async addUser(user : User): Promise<boolean> {
     console.log(user)
-    const urls = 'https://australia-southeast1-optimal-life-378201.cloudfunctions.net/addUser';
+    const urls = 'https://server-54cbxxg5ca-ts.a.run.app/addUser';
     const body = { "username": user.username, "password" : user.password };
     const headers = new HttpHeaders().set('Content-Type', 'application/json');
     try {
@@ -48,7 +48,7 @@ export class UsersService {
   // get users
   getUsers() {
     this.users = []
-    const urls = 'https://australia-southeast1-optimal-life-378201.cloudfunctions.net/getUsers';
+    const urls = 'https://server-54cbxxg5ca-ts.a.run.app/getUsers';
     const headers = new HttpHeaders().set('Content-Type', 'application/json');
     const req = this.http.post(urls, {headers: headers})
     
@@ -64,7 +64,7 @@ export class UsersService {
   // login user
   async checkUser(user: User): Promise<boolean> { 
     console.log(user)
-    const urls = 'https://australia-southeast1-optimal-life-378201.cloudfunctions.net/checkUser';
+    const urls = 'https://server-54cbxxg5ca-ts.a.run.app/checkUser';
     const body = { "username": String(user.username), "password" : String(user.password) };
     const headers = new HttpHeaders().set('Content-Type', 'application/json');
     try {
@@ -88,7 +88,7 @@ export class UsersService {
 
   // delete user
   deleteuser(user: User) {
-    const urls = 'https://australia-southeast1-optimal-life-378201.cloudfunctions.net/deleteUser';
+    const urls = 'https://server-54cbxxg5ca-ts.a.run.app/deleteUser';
     const body = { "username": user.username};
     const headers = new HttpHeaders().set('Content-Type', 'application/json');
     const req = this.http.post(urls,body, {headers: headers})

@@ -28,7 +28,7 @@ export class DataService{
 
   // add task to tasks
   addItem(name: unknown, description: unknown, username : string = 'test') {
-    const urls = 'https://australia-southeast1-optimal-life-378201.cloudfunctions.net/addTask';
+    const urls = 'https://server-54cbxxg5ca-ts.a.run.app/addTask';
     const body = { "name" : name, "description": description, "username" : username};
     const headers = new HttpHeaders().set('Content-Type', 'application/json');
     const req = this.http.post(urls,body, {headers: headers})
@@ -61,7 +61,7 @@ export class DataService{
   // get tasks
   getTasks(username: string = sessionStorage.getItem('user') as string  ) {
     this.items = []
-    const urls = 'https://australia-southeast1-optimal-life-378201.cloudfunctions.net/getTasks';
+    const urls = 'https://server-54cbxxg5ca-ts.a.run.app/getTasks';
     const body = { "username": username };
     const headers = new HttpHeaders().set('Content-Type', 'application/json');
     const req = this.http.post(urls,body, {headers: headers})
@@ -78,7 +78,7 @@ export class DataService{
 
   // edit task
   editItem(name: unknown, description: unknown, id: number){
-    const urls = 'https://australia-southeast1-optimal-life-378201.cloudfunctions.net/editTask';
+    const urls = 'https://server-54cbxxg5ca-ts.a.run.app/editTask';
     const body = { "name": name, "description" : description, "id" : id };
     const headers = new HttpHeaders().set('Content-Type', 'application/json');
     const req = this.http.post(urls,body, {headers: headers})
@@ -92,7 +92,7 @@ export class DataService{
 
   // change task
   changeitem(task: Task) {
-    const urls = 'https://australia-southeast1-optimal-life-378201.cloudfunctions.net/changeTask';
+    const urls = 'https://server-54cbxxg5ca-ts.a.run.app/changeTask';
     const body = { "id" : task.id };
     const headers = new HttpHeaders().set('Content-Type', 'application/json');
     const req = this.http.post(urls,body, {headers: headers})
@@ -109,7 +109,7 @@ export class DataService{
 
   // Translate item
   async translateItem(task: Task) : Promise<{ name: string; text: string; }> {
-    const urls = 'https://australia-southeast1-optimal-life-378201.cloudfunctions.net/translateTask';
+    const urls = 'https://server-54cbxxg5ca-ts.a.run.app/translateTask';
     const body = { "id" : task.id , "name" : task.name, "text" : task.description};
     const headers = new HttpHeaders().set('Content-Type', 'application/json');
     try {
@@ -126,7 +126,7 @@ export class DataService{
 
   // delete task
   deleteItem(task: Task) {
-    const urls = 'https://australia-southeast1-optimal-life-378201.cloudfunctions.net/deleteTask';
+    const urls = 'https://server-54cbxxg5ca-ts.a.run.app/deleteTask';
     const body = { "id" : task.id };
     const headers = new HttpHeaders().set('Content-Type', 'application/json');
     const req = this.http.post(urls,body, {headers: headers})
