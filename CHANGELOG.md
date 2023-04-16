@@ -26,5 +26,8 @@
   ***-  12.04.23 - v0.3***  Workflow in Github Actions changed to use secrets, because new GCP account used
   
   ***- 13.04.23 - v0.3*** Links to Backend changed
+
+  ***-  16.04.23 - v0.3.1***  App now using JWT as Client authorization
+
   
   
