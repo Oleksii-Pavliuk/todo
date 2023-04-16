@@ -18,7 +18,7 @@ export interface Task {
 }
 
  
-const url = "http://localhost:3000/"
+const url = "https://server-54cbxxg5ca-ts.a.run.app/"
 
 @Injectable({
   providedIn: 'root'
