@@ -18,7 +18,7 @@ export interface Task {
 }
 
  
-
+const url = "http://localhost:3000/"
 
 @Injectable({
   providedIn: 'root'
@@ -28,9 +28,10 @@ export class DataService{
 
   // add task to tasks
   addItem(name: unknown, description: unknown, username : string = 'test') {
-    const urls = 'https://server-54cbxxg5ca-ts.a.run.app/addTask';
+    const urls = url + 'addTask';
     const body = { "name" : name, "description": description, "username" : username};
-    const headers = new HttpHeaders().set('Content-Type', 'application/json');
+    const token = sessionStorage.getItem('token')
+    const headers = new HttpHeaders().set('Content-Type', 'application/json').set('Authorization','Bearer ' + token);
     const req = this.http.post(urls,body, {headers: headers})
     
     req.subscribe((data: string| any ) => {
@@ -61,9 +62,10 @@ export class DataService{
   // get tasks
   getTasks(username: string = sessionStorage.getItem('user') as string  ) {
     this.items = []
-    const urls = 'https://server-54cbxxg5ca-ts.a.run.app/getTasks';
+    const urls = url + 'getTasks';
     const body = { "username": username };
-    const headers = new HttpHeaders().set('Content-Type', 'application/json');
+    const token = sessionStorage.getItem('token')
+    const headers = new HttpHeaders().set('Content-Type', 'application/json').set('Authorization','Bearer ' + token);
     const req = this.http.post(urls,body, {headers: headers})
     
     req.subscribe((data: { data : Task[]} | any ) => {
@@ -78,9 +80,10 @@ export class DataService{
 
   // edit task
   editItem(name: unknown, description: unknown, id: number){
-    const urls = 'https://server-54cbxxg5ca-ts.a.run.app/editTask';
+    const urls = url + 'editTask';
     const body = { "name": name, "description" : description, "id" : id };
-    const headers = new HttpHeaders().set('Content-Type', 'application/json');
+    const token = sessionStorage.getItem('token')
+    const headers = new HttpHeaders().set('Content-Type', 'application/json').set('Authorization','Bearer ' + token);
     const req = this.http.post(urls,body, {headers: headers})
     
     req.subscribe((data: string| any ) => {
@@ -92,9 +95,10 @@ export class DataService{
 
   // change task
   changeitem(task: Task) {
-    const urls = 'https://server-54cbxxg5ca-ts.a.run.app/changeTask';
+    const urls = url + 'changeTask';
     const body = { "id" : task.id };
-    const headers = new HttpHeaders().set('Content-Type', 'application/json');
+    const token = sessionStorage.getItem('token')
+    const headers = new HttpHeaders().set('Content-Type', 'application/json').set('Authorization','Bearer ' + token);
     const req = this.http.post(urls,body, {headers: headers})
     
     req.subscribe((data: string| any ) => {
@@ -109,9 +113,10 @@ export class DataService{
 
   // Translate item
   async translateItem(task: Task) : Promise<{ name: string; text: string; }> {
-    const urls = 'https://server-54cbxxg5ca-ts.a.run.app/translateTask';
+    const urls = url + 'translateTask';
     const body = { "id" : task.id , "name" : task.name, "text" : task.description};
-    const headers = new HttpHeaders().set('Content-Type', 'application/json');
+    const token = sessionStorage.getItem('token')
+    const headers = new HttpHeaders().set('Content-Type', 'application/json').set('Authorization','Bearer ' + token);
     try {
       const response = await this.http.post(urls, body, {headers: headers}).toPromise();
       console.log(response)
@@ -126,9 +131,10 @@ export class DataService{
 
   // delete task
   deleteItem(task: Task) {
-    const urls = 'https://server-54cbxxg5ca-ts.a.run.app/deleteTask';
+    const urls = url + 'deleteTask';
     const body = { "id" : task.id };
-    const headers = new HttpHeaders().set('Content-Type', 'application/json');
+    const token = sessionStorage.getItem('token')
+    const headers = new HttpHeaders().set('Content-Type', 'application/json').set('Authorization','Bearer ' + token);
     const req = this.http.post(urls,body, {headers: headers})
     
     req.subscribe((data: string| any ) => {

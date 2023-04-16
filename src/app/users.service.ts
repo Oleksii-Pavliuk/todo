@@ -10,6 +10,9 @@ export interface User {
   admin: boolean
 }
 
+ 
+const url = "http://localhost:3000/"
+
 @Injectable({
   providedIn: 'root'
 })
@@ -21,15 +24,16 @@ export class UsersService {
   // add user
   async addUser(user : User): Promise<boolean> {
     console.log(user)
-    const urls = 'https://server-54cbxxg5ca-ts.a.run.app/addUser';
+    const urls = url + 'addUser';
     const body = { "username": user.username, "password" : user.password };
     const headers = new HttpHeaders().set('Content-Type', 'application/json');
     try {
-      const response   = await this.http.post(urls, body, {headers: headers}).toPromise() as {data: [User]};
+      const response   = await this.http.post(urls, body, {headers: headers}).toPromise() as {data: [User],token: string};
       console.log(response)
       console.log(response.data[0].username)
       if (response.data[0].username !== undefined) {
         sessionStorage.setItem('user', String(response.data[0].username));
+        sessionStorage.setItem('token', String(response.token))
       }else{
         return false
       }
@@ -48,9 +52,11 @@ export class UsersService {
   // get users
   getUsers() {
     this.users = []
-    const urls = 'https://server-54cbxxg5ca-ts.a.run.app/getUsers';
-    const headers = new HttpHeaders().set('Content-Type', 'application/json');
-    const req = this.http.post(urls, {headers: headers})
+    const urls = url + 'getUsers';
+    const body = { };
+    const token = sessionStorage.getItem('token')
+    const headers = new HttpHeaders().set('Content-Type', 'application/json').set('Authorization','Bearer ' + token);
+    const req = this.http.post(urls,body, {headers: headers})
     
     req.subscribe((data : User[] | any) => {
       console.log(data)
@@ -64,15 +70,16 @@ export class UsersService {
   // login user
   async checkUser(user: User): Promise<boolean> { 
     console.log(user)
-    const urls = 'https://server-54cbxxg5ca-ts.a.run.app/checkUser';
+    const urls = url + 'checkUser';
     const body = { "username": String(user.username), "password" : String(user.password) };
     const headers = new HttpHeaders().set('Content-Type', 'application/json');
     try {
-      const response   = await this.http.post(urls, body, {headers: headers}).toPromise() as {data: [User]};
+      const response   = await this.http.post(urls, body, {headers: headers}).toPromise() as {data: [User],token:string};
       console.log(response)
       console.log(response.data[0].username)
       if (response.data[0].username !== undefined) {
         sessionStorage.setItem('user', String(response.data[0].username));
+        sessionStorage.setItem('token', String(response.token))
       }else{
         return false
       }
@@ -88,9 +95,10 @@ export class UsersService {
 
   // delete user
   deleteuser(user: User) {
-    const urls = 'https://server-54cbxxg5ca-ts.a.run.app/deleteUser';
+    const urls = url + 'deleteUser';
     const body = { "username": user.username};
-    const headers = new HttpHeaders().set('Content-Type', 'application/json');
+    const token = sessionStorage.getItem('token')
+    const headers = new HttpHeaders().set('Content-Type', 'application/json').set('Authorization','Bearer ' + token);
     const req = this.http.post(urls,body, {headers: headers})
     
     req.subscribe((data: string | any) => {
