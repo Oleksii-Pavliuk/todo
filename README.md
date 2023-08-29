@@ -1,9 +1,8 @@
 # Todo
 
-Just give it a second try if something was not executed as you expected, its because of cloud functions cold start
 
 ## Description 
-Todo app where you can register and login and add your tasks, you can edit your task, mark your task as done, delete your task from list and translate yout task name and description on Ukrainian using Google Translate.
+Todo app where you can register and login to add your tasks, you can edit your task, mark your task as done, delete your task from list and translate yout task name and description on Ukrainian using Google Translate.
 
 ##### Admin interface
 If user is admin ( username: admin, password: 123456), admin can view other users history, like username, list of tasks and history of tasks: when task was done and translated
