@@ -3,9 +3,8 @@ import { Router } from '@angular/router';
 import {FormBuilder, FormControl, Validators,} from '@angular/forms';
 import { CookieService } from 'ngx-cookie-service';
 
-import { User, UsersService } from '../users.service';
+import { UsersService } from '../users.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { NgIf } from '@angular/common';
 
 @Component({
   selector: 'app-authenticate',
@@ -14,10 +13,10 @@ import { NgIf } from '@angular/common';
 })
 export class AuthenticateComponent {
 
-  authForm = this.formBuilder.group({     
+  authForm = this.formBuilder.group({
     username: new FormControl( '' ,Validators.required) ,
     password: new FormControl('',Validators.required),
-  
+
     });
 
     OnSubmit(action:string = 'Login'){
@@ -37,7 +36,7 @@ export class AuthenticateComponent {
           if(result){
             this._snackBar.open('Welcome', sessionStorage.getItem('user') as string, {duration:5000})
             this.Router.navigate(['/']);
-            
+
           }else{
             this._snackBar.open('Wrong credentials', '', {duration:5000})
           }
